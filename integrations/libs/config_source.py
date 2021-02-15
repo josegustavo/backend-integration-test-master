@@ -13,7 +13,7 @@ class ConfigSource(object):
         'client_secret',
         'grant_type',
 
-        'allowed_branchs',
+        'allowed_branches',
     ]
 
     # Default values
@@ -28,14 +28,14 @@ class ConfigSource(object):
         client_id=os.environ.get("CLIENT_ID"),
         client_secret=os.environ.get("CLIENT_SECRET"),
 
-        allowed_branchs=os.environ.get("ALLOWED_BRANCHS", 'MM,RHSM'),
+        allowed_branches=os.environ.get("ALLOWED_BRANCHES", 'MM,RHSM'),
     )
 
     def set_values(self, values):
         self._values.update(values)
 
-    def get_allowed_branchs(self):
-        return self._values.get('allowed_branchs').split(',')
+    def get_allowed_branches(self):
+        return self._values.get('allowed_branches').split(',')
 
     def __getattr__(self, item):
         if item in self._keys:

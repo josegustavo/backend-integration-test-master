@@ -19,7 +19,9 @@ class DataSource(object):
     def get_data(self):
         return self._df
 
-    def transform(self):
-        if self._transforms:
-            self._df = self._transforms.execute(self._df)
+    def transform(self, transforms: Transforms = None):
+        if not transforms:
+            transforms = self._transforms
+        if transforms:
+            self._df = transforms.execute(self._df)
         return self

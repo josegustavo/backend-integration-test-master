@@ -62,7 +62,9 @@ class Api(object):
             return True
 
     @Decorators.ensure_token
+    @Decorators.limit_request(per_hour=2000, per_day=10000)
     def post_data(self, url, data):
         r = requests.post(self.__get_url(url), headers=self._get_headers(), json=data)
+        print('Post product data', r.json())
         if r.status_code == requests.codes.ok:
             return r.json()
