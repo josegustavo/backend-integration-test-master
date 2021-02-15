@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from configparser import ConfigParser
-from libs.config_source import ConfigSource
+from integrations.libs.config_source import ConfigSource
 
 
 class ConfigFile(ConfigSource):

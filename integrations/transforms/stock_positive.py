@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from transform import Transform
+from integrations.transforms.transform import Transform
 
 
 class StockPositive(Transform):
-    pass
+
+    def execute(self, data):
+        return data[data['STOCK'] > 0]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from transform import Transform
+from integrations.transforms.transform import Transform
 
 
 class PackageExtract(Transform):

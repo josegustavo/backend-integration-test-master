@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
-from models.data_file import DataFile
+
+from integrations.data_input.data_csv import DataCsv
 
 
-class PriceStock(DataFile):
-    pass
+class PriceStock(DataCsv):
+    _columns = ['SKU', 'BRANCH', 'PRICE', 'STOCK']
+
+    _index = 'SKU'

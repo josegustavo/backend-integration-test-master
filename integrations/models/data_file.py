@@ -1,4 +1,0 @@
-
-
-class DataFile(object):
-    pass
