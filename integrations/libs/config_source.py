@@ -18,10 +18,10 @@ class ConfigSource(object):
 
     # Default values
     _values = dict(
-        # products_path=os.environ.get('PRODUCTS_PATH', 'https://cornershop-scrapers-evaluation.s3.amazonaws.com/public/PRODUCTS.csv'),
-        products_path=os.environ.get('PRODUCTS_PATH', 'D:\joseg\Downloads\PRODUCTS.csv'),
-        # price_stock_path=os.environ.get('PRICE_STOCK_PATH', 'https://cornershop-scrapers-evaluation.s3.amazonaws.com/public/PRICES-STOCK.csv'),
-        price_stock_path=os.environ.get('PRICE_STOCK_PATH', 'D:\joseg\Downloads\PRICES-STOCK.csv'),
+        products_path=os.environ.get('PRODUCTS_PATH', 'https://cornershop-scrapers-evaluation.s3.amazonaws.com/public/PRODUCTS.csv'),
+        # products_path=os.environ.get('PRODUCTS_PATH', 'D:\joseg\Downloads\PRODUCTS.csv'),
+        price_stock_path=os.environ.get('PRICE_STOCK_PATH', 'https://cornershop-scrapers-evaluation.s3.amazonaws.com/public/PRICES-STOCK.csv'),
+        # price_stock_path=os.environ.get('PRICE_STOCK_PATH', 'D:\joseg\Downloads\PRICES-STOCK.csv'),
 
         base_url=os.environ.get("BASE_URL", 'http://127.0.0.1:5000'),
         grant_type=os.environ.get("GRANT_TYPE", 'client_credentials'),
