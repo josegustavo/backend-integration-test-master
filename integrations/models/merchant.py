@@ -5,10 +5,10 @@ from integrations.models.model import Model
 
 class Merchant(Model):
 
-    can_be_deleted: bool
-    can_be_updated: bool
-    is_active: bool
-    name: str
+    can_be_deleted: bool = False
+    can_be_updated: bool = False
+    is_active: bool = False
+    name: str = ''
 
     _api = None
     _api_url = '/api/merchants'

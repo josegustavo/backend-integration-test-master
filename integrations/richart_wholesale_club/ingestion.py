@@ -26,7 +26,10 @@ class Ingestion:
 
     def __init__(self, config: ConfigSource):
         self._config = config
-        self._api = Api(self._config)
+        self._api = Api(config.base_url,
+                        config.client_id,
+                        config.client_secret,
+                        config.grant_type)
 
     def process_csv_files(self):
         self.extract()

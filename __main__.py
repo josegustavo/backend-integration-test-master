@@ -6,3 +6,4 @@ if __name__ == "__main__":
     args = Args()
     app = Ingestion(args)
     app.process_csv_files()
+    exit(0)

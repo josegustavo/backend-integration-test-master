@@ -3,38 +3,35 @@
 import time
 import requests
 
-from integrations.libs.config_source import ConfigSource
 from integrations.tools.decorators import Decorators
 
 
 class Api(object):
-    _config: ConfigSource = None
 
     token = {}
 
-    def __init__(self, config: ConfigSource):
-        self._config = config
-        self._base_url = config.base_url
+    def __init__(self, base_url: str = None, client_id: str = None, client_secret: str = None, grant_type: str = None):
+        self._base_url = base_url
 
         self._credentials = {
-            'client_id': config.client_id,
-            'client_secret': config.client_secret,
-            'grant_type': config.grant_type,
+            'client_id': client_id,
+            'client_secret': client_secret,
+            'grant_type': grant_type,
         }
 
     def __get_url(self, url: str):
         return self._base_url + '/' + url.strip("/")
 
     def get_access_token(self):
-        if not self.token:
-            url = self.__get_url('/oauth/token')
-            now = time.time()
-            request = requests.post(url, params=self._credentials)
-            response = request.json()
-            if 'access_token' not in response:
-                raise Exception(response.get('error', 'Invalid credentials'))
-            self.token = response
-            self.token['token_expiration'] = now + self.token['expires_in']
+        url = self.__get_url('/oauth/token')
+        now = time.time()
+        request = requests.post(url, params=self._credentials)
+        response = request.json()
+        if 'access_token' not in response:
+            raise Exception(response.get('error', 'Invalid credentials'))
+        token = response
+        token['token_expiration'] = now + token['expires_in']
+        return token
 
     def _get_headers(self):
         headers = {'token': 'Bearer ' + self.token.get('access_token')}
@@ -46,19 +43,19 @@ class Api(object):
     @Decorators.ensure_token
     def get_data(self, url: str):
         r = requests.get(self.__get_url(url), headers=self._get_headers())
-        if r.status_code == requests.codes.ok:
+        if r.ok:
             return r.json()
 
     @Decorators.ensure_token
     def put_data(self, url, update):
         r = requests.put(self.__get_url(url), headers=self._get_headers(), json=update)
-        if r.status_code == requests.codes.ok:
+        if r.ok:
             return r.json()
 
     @Decorators.ensure_token
     def delete_data(self, url):
         r = requests.delete(self.__get_url(url), headers=self._get_headers())
-        if r.status_code == requests.codes.ok:
+        if r.ok:
             return True
 
     @Decorators.ensure_token
@@ -66,5 +63,5 @@ class Api(object):
     def post_data(self, url, data):
         r = requests.post(self.__get_url(url), headers=self._get_headers(), json=data)
         print('Post product data', r.json())
-        if r.status_code == requests.codes.ok:
+        if r.ok:
             return r.json()
